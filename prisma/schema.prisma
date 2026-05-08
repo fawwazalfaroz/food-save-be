@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// Definisi Role (Enum)
+enum Role {
+  PEMBELI
+  PENYEDIA
+}
+
+model User {
+  id         String   @id @default(uuid())
+  nama       String
+  email      String   @unique
+  password   String
+  no_telepon String
+  role       Role
+  created_at DateTime @default(now())
+
+  // Relasi: 1 Penyedia memiliki 1 Toko
+  toko       Toko?
+}
+
+model Toko {
+  id               String   @id @default(uuid())
+  nama_toko        String
+  alamat_toko      String
+  deskripsi        String?  // Boleh kosong
+  kontak           String?  // Boleh kosong
+  jam_operasional  String
+  latitude         Float?   // Dibuat opsional (?) agar tidak error kalau belum ada maps
+  longitude        Float?   // Dibuat opsional (?)
+  rating_rata_rata Float    @default(0)
+
+  // Relasi ke User (Satu toko dimiliki oleh satu penyedia)
+  penyedia_id      String   @unique
+  penyedia         User     @relation(fields: [penyedia_id], references: [id], onDelete: Cascade)
+  
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+
+  // Relasi: 1 Toko memiliki banyak Produk
+  produk           Produk[]
+}
+
+model Produk {
+  id           String   @id @default(uuid())
+  toko_id      String
+  nama_makanan String
+  deskripsi    String
+  harga_asli   Int      // Menggunakan Int untuk mata uang Rupiah
+  harga_diskon Int
+  stok         Int
+  foto         String   // Berisi URL foto
+  waktu_pickup String
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+
+  // Relasi ke Toko
+  toko         Toko     @relation(fields: [toko_id], references: [id], onDelete: Cascade)
+}
