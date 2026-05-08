@@ -1,4 +1,4 @@
-# Food Waste Management System - Backend API 🥐
+# Food Waste Management System - Backend API
 
 Sistem backend berbasis **NestJS** untuk menghubungkan penyedia makanan (toko/restoran) dengan pembeli guna mengurangi limbah makanan melalui sistem reservasi sisa display.
 
