@@ -22,7 +22,7 @@ Sistem ini menggunakan relasi:
 - **Toko (1) <-> (N) Produk**
 
 
-## 📍 API Endpoints Utama
+## API Endpoints Utama
 
 Tabel ini berisi daftar rute API yang tersedia di dalam sistem.
 
@@ -34,8 +34,8 @@ Tabel ini berisi daftar rute API yang tersedia di dalam sistem.
 | **POST** | `/produk` | Memajang produk makanan sisa display | Ya ✅ |
 | **GET** | `/produk` | Menampilkan seluruh daftar makanan | Tidak ❌ |
 
-## 🏁 Cara Menjalankan Project Secara Lokal
+## Cara Menjalankan Project Secara Lokal
 1. **Clone repository:**
    ```bash
-   git clone [https://github.com/username/repo-name.git](https://github.com/username/repo-name.git)
+   git clone [https://github.com/fawwazalfaroz/food-save-be.git)
    cd backend
